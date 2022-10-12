@@ -1,4 +1,4 @@
-# TDAPI - NodeJS TeamDynamix API Wrapper
+# Added custom functions to TDAPI - NodeJS TeamDynamix API Wrapper
 API wrapper for TeamDynamix.
 
 To read about new features and fixes from a specific version, see the [change log](CHANGELOG.md).
