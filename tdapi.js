@@ -893,6 +893,7 @@ TDAPI.prototype.getCustomAttributes = function (componentId, associatedTypeId, a
 
 /**
  * Gets a list of all asset statuses.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<AssetStatus[]>}
  */
 TDAPI.prototype.getAssetStatuses = function () {
@@ -900,7 +901,7 @@ TDAPI.prototype.getAssetStatuses = function () {
     .then(bearerToken => {
       return request({
         method: 'GET',
-        url: `${this.baseUrl}/assets/statuses`,
+        url: `${this.baseUrl}/${appId}/assets/statuses`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -911,6 +912,7 @@ TDAPI.prototype.getAssetStatuses = function () {
 /**
  * Creates an asset.
  * @param {Asset} asset
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<Asset>}
  */
 TDAPI.prototype.createAsset = function (asset) {
@@ -918,7 +920,7 @@ TDAPI.prototype.createAsset = function (asset) {
     .then(bearerToken => {
       return request({
         method: 'POST',
-        url: `${this.baseUrl}/assets`,
+        url: `${this.baseUrl}/${appId}/assets`,
         auth: { bearer: bearerToken },
         json: true,
         body: asset
@@ -932,6 +934,7 @@ TDAPI.prototype.createAsset = function (asset) {
  * Removes a resource from an asset.
  * @param {Number} assetId    - The asset ID.
  * @param {Number} resourceId - The resource ID.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<Object>} message
  */
 TDAPI.prototype.removeAssetResource = function (assetId, resourceId) {
@@ -939,7 +942,7 @@ TDAPI.prototype.removeAssetResource = function (assetId, resourceId) {
     .then(bearerToken => {
       return request({
         method: 'DELETE',
-        url: `${this.baseUrl}/assets/${assetId}/users/${resourceId}`,
+        url: `${this.baseUrl}/${appId}/assets/${assetId}/users/${resourceId}`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -950,6 +953,7 @@ TDAPI.prototype.removeAssetResource = function (assetId, resourceId) {
 /**
  * Gets an asset.
  * @param {Number} id - The asset ID.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<Asset>}
  */
 TDAPI.prototype.getAsset = function (id) {
@@ -957,7 +961,7 @@ TDAPI.prototype.getAsset = function (id) {
     .then(bearerToken => {
       return request({
         method: 'GET',
-        url: `${this.baseUrl}/assets/${id}`,
+        url: `${this.baseUrl}/${appId}/assets/${id}`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -1033,6 +1037,7 @@ TDAPI.prototype.getAsset = function (id) {
  * Edits an existing asset.
  * @param {Number} id    - The asset ID.
  * @param {Asset}  asset - The asset with updated values.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<Asset>}
  */
 TDAPI.prototype.editAsset = function (id, asset) {
@@ -1040,7 +1045,7 @@ TDAPI.prototype.editAsset = function (id, asset) {
     .then(bearerToken => {
       return request({
         method: 'POST',
-        url: `${this.baseUrl}/assets/${id}`,
+        url: `${this.baseUrl}/${appId}/assets/${id}`,
         auth: { bearer: bearerToken },
         json: true,
         body: asset
@@ -1053,6 +1058,7 @@ TDAPI.prototype.editAsset = function (id, asset) {
 /**
  * Gets the feed entries for an asset.
  * @param {Number} id - The asset ID.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<ItemUpdate[]>}
  */
 TDAPI.prototype.getAssetFeedEntries = function (id) {
@@ -1060,7 +1066,7 @@ TDAPI.prototype.getAssetFeedEntries = function (id) {
     .then(bearerToken => {
       return request({
         method: 'GET',
-        url: `${this.baseUrl}/assets/${id}/feed`,
+        url: `${this.baseUrl}/${appId}/assets/${id}/feed`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -1072,6 +1078,7 @@ TDAPI.prototype.getAssetFeedEntries = function (id) {
  * Adds a comment to an asset.
  * @param {Number}    id        - The asset ID.
  * @param {FeedEntry} feedEntry - The item update containing the comment.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<ItemUpdate>}
  */
 TDAPI.prototype.addAssetFeedEntry = function (id, feedEntry) {
@@ -1079,7 +1086,7 @@ TDAPI.prototype.addAssetFeedEntry = function (id, feedEntry) {
     .then(bearerToken => {
       return request({
         method: 'POST',
-        url: `${this.baseUrl}/assets/${id}/feed`,
+        url: `${this.baseUrl}/${appId}/assets/${id}/feed`,
         auth: { bearer: bearerToken },
         json: true,
         body: feedEntry
@@ -1092,6 +1099,7 @@ TDAPI.prototype.addAssetFeedEntry = function (id, feedEntry) {
  * Adds an asset to a ticket.
  * @param {Number} id       - The asset ID.
  * @param {Number} ticketId - The ticket ID. This must belong to an application that the user can access.
+ * @param {Number} appId    - The associated application ID.
  * @returns {Promise<Object>} message
  */
 TDAPI.prototype.addAssetToTicket = function (id, ticketId) {
@@ -1099,7 +1107,7 @@ TDAPI.prototype.addAssetToTicket = function (id, ticketId) {
     .then(bearerToken => {
       return request({
         method: 'POST',
-        url: `${this.baseUrl}/assets/${id}/tickets/${ticketId}`,
+        url: `${this.baseUrl}/${appId}/assets/${id}/tickets/${ticketId}`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -1131,6 +1139,7 @@ TDAPI.prototype.getAssetsFromTicket = function (appId, ticketId) {
  * Removes a ticket from an asset.
  * @param {Number} id       - The asset ID.
  * @param {Number} ticketId - The ticket ID. This must belong to an application that the user can access.
+ * @param {Number} appId    - The associated application ID.
  * @returns {Promise<Object>} message
  */
 TDAPI.prototype.removeAssetFromTicket = function (id, ticketId) {
@@ -1138,7 +1147,7 @@ TDAPI.prototype.removeAssetFromTicket = function (id, ticketId) {
     .then(bearerToken => {
       return request({
         method: '',
-        url: `${this.baseUrl}/assets/${id}/tickets/${ticketId}`,
+        url: `${this.baseUrl}/${appId}/assets/${id}/tickets/${ticketId}`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -1148,7 +1157,8 @@ TDAPI.prototype.removeAssetFromTicket = function (id, ticketId) {
 
 /**
  * Gets the asset resources.
- * @param {Number} id - The asset ID.
+ * @param {Number} id    - The asset ID.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<ResourceItem>}
  */
 TDAPI.prototype.getAssetResources = function (id) {
@@ -1156,7 +1166,7 @@ TDAPI.prototype.getAssetResources = function (id) {
     .then(bearerToken => {
       return request({
         method: 'GET',
-        url: `${this.baseUrl}/assets/${id}/users`,
+        url: `${this.baseUrl}/${appId}/assets/${id}/users`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -1168,6 +1178,7 @@ TDAPI.prototype.getAssetResources = function (id) {
  * Adds a resource to an asset.
  * @param {Number} id         - The asset ID.
  * @param {Number} resourceId - The resource ID.
+ * @param {Number} appId      - The associated application ID.
  * @returns {Promise<Object>} message
  */
 TDAPI.prototype.addAssetResource = function (id, resourceId) {
@@ -1175,7 +1186,7 @@ TDAPI.prototype.addAssetResource = function (id, resourceId) {
     .then(bearerToken => {
       return request({
         method: 'POST',
-        url: `${this.baseUrl}/assets/${id}/users/${resourceId}`,
+        url: `${this.baseUrl}/${appId}/assets/${id}/users/${resourceId}`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -1186,6 +1197,7 @@ TDAPI.prototype.addAssetResource = function (id, resourceId) {
 /**
  * Performs a bulk insert/update of assets in the system.
  * @param {BulkImport<Asset[]>} importData - The collection of items that are being imported and the corresponding import settings.
+ * @param {Number} appId                   - The associated application ID.
  * @returns {Promise<ItemResult>}
  */
 TDAPI.prototype.importAssets = function (importData) {
@@ -1193,7 +1205,7 @@ TDAPI.prototype.importAssets = function (importData) {
     .then(bearerToken => {
       return request({
         method: 'POST',
-        url: `${this.baseUrl}/assets/import`,
+        url: `${this.baseUrl}/${appId}/assets/import`,
         auth: { bearer: bearerToken },
         json: true,
         body: importData
@@ -1205,6 +1217,7 @@ TDAPI.prototype.importAssets = function (importData) {
 /**
  * Gets a list of assets.
  * @param {AssetSearch} [searchParams] - The search parameters to use.
+ * @param {Number} appId               - The associated application ID.
  * @returns {Promise<Asset[]>}
  */
 TDAPI.prototype.getAssets = function (searchParams) {
@@ -1212,7 +1225,7 @@ TDAPI.prototype.getAssets = function (searchParams) {
     .then(bearerToken => {
       return request({
         method: 'POST',
-        url: `${this.baseUrl}/assets/search`,
+        url: `${this.baseUrl}/${appId}/assets/search`,
         auth: { bearer: bearerToken },
         json: true,
         body: searchParams || {}
@@ -1231,6 +1244,7 @@ TDAPI.prototype.getAssets = function (searchParams) {
 
 /**
  * Gets a list of active vendors.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<Vendor[]>}
  */
 TDAPI.prototype.getVendors = function () {
@@ -1238,7 +1252,7 @@ TDAPI.prototype.getVendors = function () {
     .then(bearerToken => {
       return request({
         method: 'GET',
-        url: `${this.baseUrl}/assets/vendors`,
+        url: `${this.baseUrl}/${appId}/assets/vendors`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -1247,7 +1261,8 @@ TDAPI.prototype.getVendors = function () {
 };
 /**
  * Gets a list of vendors.
- * @param {VendorSearch} query - The searching parameters to use 
+ * @param {VendorSearch} query - The searching parameters to use.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<Vendor[]>}
  */
 TDAPI.prototype.searchVendors = function (query) {
@@ -1255,7 +1270,7 @@ TDAPI.prototype.searchVendors = function (query) {
     .then(bearerToken => {
       return request({
         method: 'POST',
-        url: `${this.baseUrl}/assets/vendors/search`,
+        url: `${this.baseUrl}/${appId}/assets/vendors/search`,
         auth: { bearer: bearerToken },
         json: true,
         body: query || {}
@@ -1266,7 +1281,8 @@ TDAPI.prototype.searchVendors = function (query) {
 
 /**
  * Gets a vendor.
- * @param {Number} id - The vendor ID.
+ * @param {Number} id    - The vendor ID.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<Vendor>}
  */
 TDAPI.prototype.getVendor = function (id) {
@@ -1274,7 +1290,7 @@ TDAPI.prototype.getVendor = function (id) {
     .then(bearerToken => {
       return request({
         method: 'GET',
-        url: `${this.baseUrl}/assets/vendors/${id}`,
+        url: `${this.baseUrl}/${appId}/assets/vendors/${id}`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -1285,6 +1301,7 @@ TDAPI.prototype.getVendor = function (id) {
 /**
  * Creates a new vendor.
  * @param {Vendor} vendor - The vendor to be created.
+ * @param {Number} appId  - The associated application ID.
  * @returns {Promise<Vendor>}
  */
 TDAPI.prototype.createVendor = function (vendor) {
@@ -1292,7 +1309,7 @@ TDAPI.prototype.createVendor = function (vendor) {
     .then(bearerToken => {
       return request({
         method: 'POST',
-        url: `${this.baseUrl}/assets/vendors`,
+        url: `${this.baseUrl}/${appId}/assets/vendors`,
         auth: { bearer: bearerToken },
         json: true,
         body: vendor || {}
@@ -1303,6 +1320,7 @@ TDAPI.prototype.createVendor = function (vendor) {
 
 /**
  * Gets a list of active product models.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<ProductModel[]>}
  */
 TDAPI.prototype.getProductModels = function () {
@@ -1310,7 +1328,7 @@ TDAPI.prototype.getProductModels = function () {
     .then(bearerToken => {
       return request({
         method: 'GET',
-        url: `${this.baseUrl}/assets/models`,
+        url: `${this.baseUrl}/${appId}/assets/models`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -1321,6 +1339,7 @@ TDAPI.prototype.getProductModels = function () {
 /**
  * Gets the specified product model. 
  * @param {Number} id
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<ProductModel>}
  */
 TDAPI.prototype.getProductModel = function (id) {
@@ -1328,7 +1347,7 @@ TDAPI.prototype.getProductModel = function (id) {
     .then(bearerToken => {
       return request({
         method: 'GET',
-        url: `${this.baseUrl}/assets/models/${id}`,
+        url: `${this.baseUrl}/${appId}/assets/models/${id}`,
         auth: { bearer: bearerToken },
         json: true
       });
@@ -1339,6 +1358,7 @@ TDAPI.prototype.getProductModel = function (id) {
 /**
  * Creates a new product model.
  * @param {ProductModel} productModel
+ * @param {Number} appId   - The associated application ID.
  * @returns {ProductModel} - The new Product Model.
  */
 TDAPI.prototype.createProductModel = function (productModel) {
@@ -1346,7 +1366,7 @@ TDAPI.prototype.createProductModel = function (productModel) {
     .then(bearerToken => {
       return request({
         method: 'POST',
-        url: `${this.baseUrl}/assets/models`,
+        url: `${this.baseUrl}/${appId}/assets/models`,
         auth: { bearer: bearerToken },
         json: true,
         body: productModel || {}
@@ -1357,15 +1377,16 @@ TDAPI.prototype.createProductModel = function (productModel) {
 
 /**
  * Edits a product model.
- * @param {ProductModel} productModel - The locally edited product model
- * @returns {Promise<ProductModel>} - The updated Product Model in TDx
+ * @param {ProductModel} productModel - The locally edited product model.
+ * @param {Number} appId              - The associated application ID.
+ * @returns {Promise<ProductModel>}   - The updated Product Model in TDx.
  */
 TDAPI.prototype.editProductModel = function (productModel) {
   return this.login()
     .then(bearerToken => {
       return request({
         method: 'PUT',
-        url: `${this.baseUrl}/assets/models/${productModel.ID}`,
+        url: `${this.baseUrl}/${appId}/assets/models/${productModel.ID}`,
         auth: { bearer: bearerToken },
         json: true,
         body: productModel || {}
@@ -1590,6 +1611,7 @@ TDAPI.prototype.deleteAttachment = function (id) {
 /**
  * Gets an article from Knowledge Base.
  * @param {Number} articleID - The article ID.
+ * @param {Number} appId - The associated application ID.
  * @returns {Promise<Article>}
  */
 TDAPI.prototype.getArticle = async function (articleID) {
@@ -1597,7 +1619,7 @@ TDAPI.prototype.getArticle = async function (articleID) {
     let bearerToken = await this.login();
     let data = await request({
       method: 'GET',
-      url: `${this.baseUrl}/knowledgebase/${articleID}`,
+      url: `${this.baseUrl}/${appId}/knowledgebase/${articleID}`,
       auth: { bearer: bearerToken },
       json: true,
     });
@@ -1610,7 +1632,8 @@ TDAPI.prototype.getArticle = async function (articleID) {
 
 /** 
  * Searches for articles from Knowledge Base.
- * @param {ArticleSearch} searchParams - the search parameters for an article
+ * @param {ArticleSearch} searchParams - The search parameters for an article.
+ * @param {Number} appId               - The associated application ID.
  * @returns {Promise<Array<Article>>}
  */
 TDAPI.prototype.getArticles = async function (searchParams) {
@@ -1618,7 +1641,7 @@ TDAPI.prototype.getArticles = async function (searchParams) {
     let bearerToken = await this.login();
     return request({
       method: 'POST',
-      url: `${this.baseUrl}/knowledgebase/search`,
+      url: `${this.baseUrl}/${appId}/knowledgebase/search`,
       auth: { bearer: bearerToken },
       json: true,
       body: searchParams || {}
