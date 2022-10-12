@@ -896,7 +896,7 @@ TDAPI.prototype.getCustomAttributes = function (componentId, associatedTypeId, a
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<AssetStatus[]>}
  */
-TDAPI.prototype.getAssetStatuses = function () {
+TDAPI.prototype.getAssetStatuses = function (appId) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -915,7 +915,7 @@ TDAPI.prototype.getAssetStatuses = function () {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<Asset>}
  */
-TDAPI.prototype.createAsset = function (asset) {
+TDAPI.prototype.createAsset = function (appId, asset) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -937,7 +937,7 @@ TDAPI.prototype.createAsset = function (asset) {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<Object>} message
  */
-TDAPI.prototype.removeAssetResource = function (assetId, resourceId) {
+TDAPI.prototype.removeAssetResource = function (appId, assetId, resourceId) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -956,7 +956,7 @@ TDAPI.prototype.removeAssetResource = function (assetId, resourceId) {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<Asset>}
  */
-TDAPI.prototype.getAsset = function (id) {
+TDAPI.prototype.getAsset = function (appId, id) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1018,7 +1018,7 @@ TDAPI.prototype.getAsset = function (id) {
  * @param {CI}  ci - The CI with updated values.
  * @returns {Promise<CI>}
  */
- TDAPI.prototype.editCI = function (id, ci) {
+ TDAPI.prototype.editCI = function (appId, id, ci) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1040,7 +1040,7 @@ TDAPI.prototype.getAsset = function (id) {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<Asset>}
  */
-TDAPI.prototype.editAsset = function (id, asset) {
+TDAPI.prototype.editAsset = function (appId, id, asset) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1061,7 +1061,7 @@ TDAPI.prototype.editAsset = function (id, asset) {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<ItemUpdate[]>}
  */
-TDAPI.prototype.getAssetFeedEntries = function (id) {
+TDAPI.prototype.getAssetFeedEntries = function (appId, id) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1081,7 +1081,7 @@ TDAPI.prototype.getAssetFeedEntries = function (id) {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<ItemUpdate>}
  */
-TDAPI.prototype.addAssetFeedEntry = function (id, feedEntry) {
+TDAPI.prototype.addAssetFeedEntry = function (appId, id, feedEntry) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1102,7 +1102,7 @@ TDAPI.prototype.addAssetFeedEntry = function (id, feedEntry) {
  * @param {Number} appId    - The associated application ID.
  * @returns {Promise<Object>} message
  */
-TDAPI.prototype.addAssetToTicket = function (id, ticketId) {
+TDAPI.prototype.addAssetToTicket = function (appId, id, ticketId) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1142,7 +1142,7 @@ TDAPI.prototype.getAssetsFromTicket = function (appId, ticketId) {
  * @param {Number} appId    - The associated application ID.
  * @returns {Promise<Object>} message
  */
-TDAPI.prototype.removeAssetFromTicket = function (id, ticketId) {
+TDAPI.prototype.removeAssetFromTicket = function (appId, id, ticketId) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1161,7 +1161,7 @@ TDAPI.prototype.removeAssetFromTicket = function (id, ticketId) {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<ResourceItem>}
  */
-TDAPI.prototype.getAssetResources = function (id) {
+TDAPI.prototype.getAssetResources = function (appId, id) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1181,7 +1181,7 @@ TDAPI.prototype.getAssetResources = function (id) {
  * @param {Number} appId      - The associated application ID.
  * @returns {Promise<Object>} message
  */
-TDAPI.prototype.addAssetResource = function (id, resourceId) {
+TDAPI.prototype.addAssetResource = function (appId, id, resourceId) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1200,7 +1200,7 @@ TDAPI.prototype.addAssetResource = function (id, resourceId) {
  * @param {Number} appId                   - The associated application ID.
  * @returns {Promise<ItemResult>}
  */
-TDAPI.prototype.importAssets = function (importData) {
+TDAPI.prototype.importAssets = function (appId, importData) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1220,7 +1220,7 @@ TDAPI.prototype.importAssets = function (importData) {
  * @param {Number} appId               - The associated application ID.
  * @returns {Promise<Asset[]>}
  */
-TDAPI.prototype.getAssets = function (searchParams) {
+TDAPI.prototype.getAssets = function (appId, searchParams) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1247,7 +1247,7 @@ TDAPI.prototype.getAssets = function (searchParams) {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<Vendor[]>}
  */
-TDAPI.prototype.getVendors = function () {
+TDAPI.prototype.getVendors = function (appId) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1265,7 +1265,7 @@ TDAPI.prototype.getVendors = function () {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<Vendor[]>}
  */
-TDAPI.prototype.searchVendors = function (query) {
+TDAPI.prototype.searchVendors = function (appId, query) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1285,7 +1285,7 @@ TDAPI.prototype.searchVendors = function (query) {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<Vendor>}
  */
-TDAPI.prototype.getVendor = function (id) {
+TDAPI.prototype.getVendor = function (appId, id) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1304,7 +1304,7 @@ TDAPI.prototype.getVendor = function (id) {
  * @param {Number} appId  - The associated application ID.
  * @returns {Promise<Vendor>}
  */
-TDAPI.prototype.createVendor = function (vendor) {
+TDAPI.prototype.createVendor = function (appId, vendor) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1323,7 +1323,7 @@ TDAPI.prototype.createVendor = function (vendor) {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<ProductModel[]>}
  */
-TDAPI.prototype.getProductModels = function () {
+TDAPI.prototype.getProductModels = function (appId) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1342,7 +1342,7 @@ TDAPI.prototype.getProductModels = function () {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<ProductModel>}
  */
-TDAPI.prototype.getProductModel = function (id) {
+TDAPI.prototype.getProductModel = function (appId, id) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1361,7 +1361,7 @@ TDAPI.prototype.getProductModel = function (id) {
  * @param {Number} appId   - The associated application ID.
  * @returns {ProductModel} - The new Product Model.
  */
-TDAPI.prototype.createProductModel = function (productModel) {
+TDAPI.prototype.createProductModel = function (appId, productModel) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1381,7 +1381,7 @@ TDAPI.prototype.createProductModel = function (productModel) {
  * @param {Number} appId              - The associated application ID.
  * @returns {Promise<ProductModel>}   - The updated Product Model in TDx.
  */
-TDAPI.prototype.editProductModel = function (productModel) {
+TDAPI.prototype.editProductModel = function (appId, productModel) {
   return this.login()
     .then(bearerToken => {
       return request({
@@ -1614,7 +1614,7 @@ TDAPI.prototype.deleteAttachment = function (id) {
  * @param {Number} appId - The associated application ID.
  * @returns {Promise<Article>}
  */
-TDAPI.prototype.getArticle = async function (articleID) {
+TDAPI.prototype.getArticle = async function (appId, articleID) {
   try {
     let bearerToken = await this.login();
     let data = await request({
@@ -1636,7 +1636,7 @@ TDAPI.prototype.getArticle = async function (articleID) {
  * @param {Number} appId               - The associated application ID.
  * @returns {Promise<Array<Article>>}
  */
-TDAPI.prototype.getArticles = async function (searchParams) {
+TDAPI.prototype.getArticles = async function (appId, searchParams) {
   try {
     let bearerToken = await this.login();
     return request({
